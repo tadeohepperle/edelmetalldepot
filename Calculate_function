@@ -1,0 +1,65 @@
+import pandas as pd
+
+def calculate_gold_return ( datum1, datum2):
+    df = pd.read_csv('LBMA-GOLD.csv')
+    
+    row_date1 = df[df["Date"] == datum1]
+    row_date2 = df [df["Date"] == datum2]
+    
+    
+    goldprice_date1 = (float) ((row_date1 ["EURO (AM)"] + row_date1 ["EURO (PM)"]) / 2)
+    goldprice_date2 = (float) (row_date2 ["EURO (AM)"] + row_date2 ["EURO (PM)"]) / 2
+    
+    result = (goldprice_date2 / goldprice_date1) * 100 - 100
+    return result
+
+    #fehler abfangen: 2. Außerhalb Bereich 3. 2te Eingabe vor erster
+
+
+
+#Jetzr für alle
+def calculate_silver_return (datum1, datum2) :
+    df_silver = pd.read_csv('LBMA-SILVER.csv');
+    
+    row_date1 = df_silver[df_silver["Date"] == datum1]
+    row_date2 = df_silver[df_silver["Date"] == datum2]
+    
+    silver_price1 = (float) (row_date1 ["EURO"])
+    silver_price2 = (float) (row_date2 ["EURO"])
+    
+    result = (silver_price2 / silver_price1) * 100 - 100
+    return result
+
+def calculate_pall_return (datum1, datum2):
+    df = pd.read_csv('LPPM-PALL.csv')
+    
+    row_date1 = df[df["Date"] == datum1]
+    row_date2 = df [df["Date"] == datum2]
+    
+    
+    pall_price1 = (float) ((row_date1 ["EUR AM"] + row_date1 ["EUR PM"]) / 2)
+    pall_price2 = (float) (row_date2 ["EUR AM"] + row_date2 ["EUR PM"]) / 2
+    
+    result = (pall_price2 / pall_price1) * 100 - 100
+    return result
+
+def calculate_plat_return (datum1, datum2):
+    df = pd.read_csv('LPPM-PLAT.csv')
+    
+    row_date1 = df[df["Date"] == datum1]
+    row_date2 = df [df["Date"] == datum2]
+    
+    
+    plat_price1 = (float) ((row_date1 ["EUR AM"] + row_date1 ["EUR PM"]) / 2)
+    plat_price2 = (float) (row_date2 ["EUR AM"] + row_date2 ["EUR PM"]) / 2
+    
+    result = (plat_price2 / plat_price1) * 100 - 100
+    return result
+
+def calculate_return (datum1, datum2, amount_gold, amount_silver, amount_pall, amount_plat):
+    #
+    res_gold = (calculate_gold_return(datum1, datum2) / 100) * amount_gold + amount_gold
+    res_silver = (calculate_silver_return(datum1, datum2) / 100) * amount_silver + amount_silver
+    res_pall = (calculate_pall_return(datum1, datum2) / 100) * amount_pall + amount_pall
+    res_plat = (calculate_plat_return(datum1, datum2) / 100) * amount_plat + amount_plat
+    return res_gold + res_silver + res_pall + amount_plat
