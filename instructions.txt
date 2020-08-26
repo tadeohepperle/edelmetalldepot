@@ -1,0 +1,49 @@
+Install python, add to path.
+
+> pip list
+
+Create Environment: 
+> python -m venv mein_projekt
+
+Activate Virtual Environment:
+> mein_projekt\Skripts\activate.bat
+
+We are now in the environment (mein_projekt)
+
+> where python
+> pip list
+> pip install requests
+> pip install pytz
+
+
+export the requirements.txt file:
+
+
+> pip freeze
+then put information from there in a requirements.txt file
+
+to deactivate environment:
+> deactivate
+
+delete environment:
+> rmdir mein_projekt /s
+
+
+create a new project:
+(Also "Projektordner" -> Ordner "venv")
+
+> mkdir projekt2
+> python -m venv projekt2\venv
+> projekt2\venv\Scripts\activate.bat
+> pip install -r requirements.txt
+
+
+> pip freeze > requirements.txt
+
+
+Get startet with flask:
+
+> pip install flask
+> py -m flask run
+
+looks for app.py and runs it.
